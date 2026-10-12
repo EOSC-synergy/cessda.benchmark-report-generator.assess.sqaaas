@@ -1,0 +1,52 @@
+config:
+  credentials: []
+  project_repos:
+    github.com/EOSC-synergy/sqaaas-tooling:
+      branch: fix/updatego
+      repo: https://github.com/EOSC-synergy/sqaaas-tooling
+    github.com/cessda/cessda.benchmark-report-generator:
+      branch: main
+      repo: https://github.com/cessda/cessda.benchmark-report-generator
+environment:
+  JPL_DOCKERFORCEBUILD: enabled
+  JPL_KEEPGOING: enabled
+sqa_criteria:
+  QC.Acc:
+    repos:
+      github.com/cessda/cessda.benchmark-report-generator git:
+        commands:
+        - /usr/bin/env sh .sqa/script.onyx_reserved_hare.sh
+        container: qc.acc_violet_spirited_antelope
+  QC.Doc:
+    repos:
+      github.com/cessda/cessda.benchmark-report-generator find_doc_files.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.espresso_serene_dolphin.sh
+        container: qc.doc_saffron_blissful_hippopotamus
+      github.com/cessda/cessda.benchmark-report-generator git:
+        commands:
+        - /usr/bin/env sh .sqa/script.aqua_positive_viper.sh
+        container: qc.doc_goldenrod_dedicated_quoll
+      github.com/cessda/cessda.benchmark-report-generator markdownlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.glacier_savvy_cassowary.sh
+        container: qc.doc_thunder_rustic_porpoise
+  QC.Lic:
+    repos:
+      github.com/cessda/cessda.benchmark-report-generator licensee:
+        commands:
+        - /usr/bin/env sh .sqa/script.white_affectionate_dormouse.sh
+        container: qc.lic_butterscotch_reserved_gerbil
+  QC.Met:
+    repos:
+      github.com/cessda/cessda.benchmark-report-generator cff-converter-python:
+        commands:
+        - /usr/bin/env sh .sqa/script.fandango_joyful_cassowary.sh
+        container: qc.met_butter_goofy_antelope
+  QC.Ver:
+    repos:
+      github.com/cessda/cessda.benchmark-report-generator get_git_tags.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.tundra_passionate_shark.sh
+        container: qc.ver_orange_restless_dragon
+timeout: 5400
